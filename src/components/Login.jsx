@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -79,7 +79,7 @@ const Login = ({ onLogin }) => {
             />
           </div>
 
-          <div className="flex items-baseline justify-between mt-4">
+          <div className="flex items-baseline justify-center mt-4">
             <button
               type="submit"
               className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
@@ -87,9 +87,9 @@ const Login = ({ onLogin }) => {
               Iniciar Sesión
             </button>
 
-            <a href="#" className="text-sm text-blue-600 hover:underline">
+            {/* <a href="#" className="text-sm text-blue-600 hover:underline">
               ¿Olvidó su contraseña?
-            </a>
+            </a> */}
           </div>
         </form>
 
