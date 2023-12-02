@@ -1,5 +1,5 @@
 //import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -36,7 +36,12 @@ const Login = ({ onLogin }) => {
 
         // Redirect to home based on role
         if (userData.rol === 'Cliente') {
-          navigate('/');
+          navigate('/',{
+            replace: true,
+            state: {
+              logged: true
+            }
+          });
         } else {
           console.log('Role no reconocido');
         }
@@ -80,7 +85,8 @@ const Login = ({ onLogin }) => {
           </div>
 
           <div className="flex items-baseline justify-center mt-4">
-            <button
+            <button 
+              id='ingresar'
               type="submit"
               className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
             >
@@ -95,9 +101,11 @@ const Login = ({ onLogin }) => {
 
         <div className="mt-6 text-grey-dark">
           ¿No tienes una cuenta?
-          <a className="text-blue-600 hover:underline" href="#">
-            Regístrate
-          </a>
+          <NavLink to="/registro">
+            <a id="registrarse" className="text-blue-600 hover:underline" href="#">
+              Regístrate
+            </a>
+          </NavLink>
         </div>
       </div>
     </div>

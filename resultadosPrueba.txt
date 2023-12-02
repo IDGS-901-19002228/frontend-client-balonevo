@@ -1,0 +1,57 @@
+1/12/2023, 16:26:03: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="login"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:27:31: Se registró un cliente 1
+1/12/2023, 16:27:32: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="ingresar"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:29:14: Se registró un cliente 1
+1/12/2023, 16:29:14: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:33:50: Se registró un cliente 1
+1/12/2023, 16:33:51: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:35:21: Se registró un cliente 1
+1/12/2023, 16:35:21: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:36:11: Se registró un cliente 1
+1/12/2023, 16:36:12: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:42:44: Se registró un cliente 1
+1/12/2023, 16:42:44: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:42:44: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="agregarProducto"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:43:26: Se registró un cliente 1
+1/12/2023, 16:43:27: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:43:27: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="agregarProducto"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:46:07: Se registró un cliente 1
+1/12/2023, 16:46:08: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:46:08: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="agregarProducto"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:49:44: Se registró un cliente 1
+1/12/2023, 16:49:45: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:54:34: Se registró un cliente 1
+1/12/2023, 16:54:35: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:54:35: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"agregarProducto"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 16:55:44: Se registró un cliente 1
+1/12/2023, 16:55:44: Se ha iniciado la sesión para el usuario1
+1/12/2023, 16:59:44: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="login"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 17:02:10: Se registró un cliente 1
+1/12/2023, 17:02:11: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:05:51: Se registró un cliente 1
+1/12/2023, 17:05:51: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:05:51: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="cerrarSesion"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 17:08:08: Se registró un cliente 1
+1/12/2023, 17:08:09: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:08:09: Error en la prueba: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 17:09:09: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:09:09: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="cerrarSesion"]"}
+  (Session info: chrome=119.0.6045.200)
+1/12/2023, 17:10:05: Se registró un cliente 1
+1/12/2023, 17:10:06: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:15:58: Se registró un cliente 1
+1/12/2023, 17:15:58: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:19:29: Confirmar registro registró del cliente 1
+1/12/2023, 17:19:30: Se ha registrado el cliente 1
+1/12/2023, 17:19:30: Se ha iniciado la sesión para el usuario1
+1/12/2023, 17:23:30: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="login"]"}
+  (Session info: chrome=119.0.6045.200)

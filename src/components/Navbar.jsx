@@ -1,32 +1,41 @@
-import { NavLink } from 'react-router-dom'
-import { useState } from 'react';
-import Swal from 'sweetalert2';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+// import { useState } from 'react';
+// import Swal from 'sweetalert2';
+import { useCarrito } from '../context/CarritoContext';
 
-const Navbar = () => {
+const Navbar = ({userData}) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const  {state} = useLocation();
+    const navigate = useNavigate();
+    const { cart } = useCarrito();
 
-    const handleLogin = () => {
-      // Lógica para iniciar sesión
-      setIsLoggedIn(true);
-    };
+    // const handleLogin = () => {
+    //   // Lógica para iniciar sesión
+    //   setIsLoggedIn(true);
+    // };
   
+
     const handleLogout = () => {
-      // Lógica para cerrar sesión
-      Swal.fire({
-        title: 'Confirmar Cierre de sesión',
-        text: '¿Seguro que quieres cerrar sesión?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Lógica para cerrar sesión
-          setIsLoggedIn(false);
-          // Otras acciones después de cerrar sesión, como redirigir a la página de inicio de sesión
-        }
-      });
+        navigate('/', {
+            replace: true
+        }, 
+        );
+    //   // Lógica para cerrar sesión
+    //   Swal.fire({
+    //     title: 'Confirmar Cierre de sesión',
+    //     text: '¿Seguro que quieres cerrar sesión?',
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Si',
+    //     cancelButtonText: 'No'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       // Lógica para cerrar sesión
+    //       setIsLoggedIn(false);
+    //       // Otras acciones después de cerrar sesión, como redirigir a la página de inicio de sesión
+    //     }
+    //   });
     };
 
     return(
@@ -55,33 +64,59 @@ const Navbar = () => {
                 </div>
                 <div className='flex ml-5 space-x-2'>
                     {/* Condicionalmente renderiza el botón de inicio de sesión o la opción de perfil */}
-                    {isLoggedIn ? (
+                    {state?.logged? (
                     <div className="flex items-center space-x-2">
                         {/* Puedes personalizar la opción de perfil según tus necesidades */}
-                        <span className="text-gray-900">Hola, Usuario</span>
-                        <button
+                        {/* <span className="text-gray-900">Hola, Usuario</span> */}
+                        {/* <button
                         onClick={handleLogout}
-                        className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                        className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                         >
                         Cerrar Sesión
+                        </button> */}
+                         
+                        <button
+                            type="button"
+                            id='cerrarSesion'
+                            onClick={handleLogout}
+                            className="focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            Logout
                         </button>
+                      
+                        <NavLink to="/carrito">
+                            {/* Muestra el número de productos en el carrito */}
+                            <button
+                            type="button"
+                            
+                            className=" carrito focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                            Carrito ({cart.length})
+                            </button>
+                        </NavLink>
+                        <NavLink to={`/pedidos/${userData?.usuario}`}>
+                        <a href="" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Mis pedidos</a>
+                  
+                        </NavLink>
+                       
+
+                        
                         {/* Agregar enlaces adicionales según el tipo de usuario */}
-                        <NavLink to="/CarritoCompraComponent">
+                        {/* <NavLink to="/CarritoCompraComponent">
                         <button
                             type="button"
                             className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             Carrito de Compra
                         </button>
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                     ) : (
                     <NavLink to="/login">
                         <button
+                        id="login"
                         type="button"
-                        onClick={handleLogin}
-                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                        >
+                        // onClick={handleLogin}
+                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Login
                         </button>
                     </NavLink>
@@ -118,6 +153,24 @@ const Navbar = () => {
                     <li>
                     <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Tienda</a>
                     </li>
+                    {/* <li>
+                        {user.rol && (
+                            <h6 className="text-grey">
+                                {user.rol === 'Cliente' ? (
+                                <>
+                                    <NavLink className={({ isActive }) => (isActive ? 'active':'hover')} to="/about">
+                                        <a className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pedidos</a>
+                                    </NavLink>
+                                </>
+                                ) : (
+                                <>
+                                    <span className="other-role"></span>
+                                    Otro Rol
+                                </>
+                                )}
+                            </h6>
+                        )}
+                    </li> */}
                 </ul>
                 </div>
             </div>
