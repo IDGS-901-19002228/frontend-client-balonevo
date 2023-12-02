@@ -11,6 +11,8 @@ import PedidosCliente from './components/PedidosCliente';
 import { CarritoProvider } from './context/CarritoContext';
 import Carrito from './components/Carrito';
 import DetallePedido from './components/DetallePedido';
+import DireccionesPage from './pages/DireccionesPage';
+import { AuthProvider } from './context/AuthContext';
 
 
 const App = () => {
@@ -37,34 +39,32 @@ const App = () => {
       permissions: []
     });
   };
-  // <Route path="/pedidos-cliente" element={
-  //   <ProtectedRoute isAllowed={userData.rol.name === "Cliente"} fallback={<Navigate to="/login" />}>
-  //   <PedidosCliente />
-  //   </ProtectedRoute>
-  //   }
-  // />
+
 
   return (
-    <CarritoProvider> {/* Envuelve la aplicación con el proveedor del contexto del carrito */}
-      <BrowserRouter>
-        <Navbar userData={userData} onLogout={handleLogout} />
-        <div className="pt-20">
-          <Routes>
-            <Route element={<ProtectedRoute isAllowed={userData?.rol?.includes('Cliente')} />}> 
-              <Route path="/pedidos/:name" element={<PedidosCliente />} />
-              <Route path="/detallePedido/:id" element={<DetallePedido/>} />
-            </Route>
-           
-            <Route path="/carrito" element={<Carrito />} /> {/* Ruta para el carrito */}
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/registro" element={<Registro />} />
+    <AuthProvider>
+      <CarritoProvider> {/* Envuelve la aplicación con el proveedor del contexto del carrito */}
+        <BrowserRouter>
+          <Navbar userData={userData} onLogout={handleLogout} />
+          <div className="pt-20">
+            <Routes>
+              <Route element={<ProtectedRoute isAllowed={userData?.rol?.includes('Cliente')} />}> 
+                <Route path="/pedidos/:name" element={<PedidosCliente />} />
+                <Route path="/detallePedido/:id" element={<DetallePedido/>} />
+                <Route path="/direcciones" element={<DireccionesPage/>} />
+              </Route>
+            
+              <Route path="/carrito" element={<Carrito logged={userData?.logged} />} /> {/* Ruta para el carrito */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route path="/registro" element={<Registro />} />
 
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </CarritoProvider>
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </CarritoProvider>
+    </AuthProvider>
   );
 };
 

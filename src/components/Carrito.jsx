@@ -1,9 +1,22 @@
-// Carrito.js
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
 
-const Carrito = () => {
-  const { cart } = useCarrito();
+const Carrito = ({ logged }) => {
+  const { cart, removeFromCart, clearCart } = useCarrito();
+  const navigate = useNavigate();
+
+  const handleRealizarPedido = () => {
+    if (logged) {
+      // Lógica para realizar el pedido (usuario autenticado)
+      console.log('Pedido realizado');
+      navigate('/direcciones');
+    } else {
+      // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
+      navigate('/login');
+      console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
+    }
+  };
 
   const calcularTotal = () => {
     return cart.reduce((total, item) => total + item.precio, 0).toFixed(2);
@@ -27,7 +40,7 @@ const Carrito = () => {
                 </div>
               </div>
               <div>
-                <button className="text-red-500 hover:text-red-600 focus:outline-none">
+                <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-600 focus:outline-none">
                   Eliminar
                 </button>
               </div>
@@ -36,8 +49,11 @@ const Carrito = () => {
 
           <div className="mt-4">
             <p className="text-xl font-semibold">Total: ${calcularTotal()}</p>
-            <button className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
-              Realizar Pedido
+            <button onClick={handleRealizarPedido} className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
+              Proceder al pago
+            </button>
+            <button onClick={clearCart} className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
+              Vaciar Carrito
             </button>
           </div>
         </div>
