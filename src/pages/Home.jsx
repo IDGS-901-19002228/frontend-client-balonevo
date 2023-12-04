@@ -58,7 +58,7 @@ export default function Home() {
                 </button>
             </div>
 
-            <CatalogoCard/>
+            <CatalogoCard />
         </>
     )
 }

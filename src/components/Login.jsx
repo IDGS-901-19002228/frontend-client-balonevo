@@ -2,10 +2,18 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+
+  const { setUserData } = useContext(AuthContext);
+
+  // const handleLogin = (userData) => {
+  //    userData(userData); 
+  // };
 
   const onSubmit = async (data) => {
     try {
@@ -24,13 +32,16 @@ const Login = ({ onLogin }) => {
           }
         );
 
-        const userData = {
+        const userData = {  
           usuario: data.usuario,
-          rol: response.data.rol,
+          rol: response.data.rol 
         };
+    
+        setUserData(userData);
+        
 
         // Call the onLogin function and pass the userData
-        onLogin(userData);
+        //onLogin(userData);
 
         console.log(userData);
 

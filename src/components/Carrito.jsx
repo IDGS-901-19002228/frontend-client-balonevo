@@ -1,16 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 
-const Carrito = ({ logged }) => {
+const Carrito = () => {
+  const { authState } = useContext(AuthContext); 
   const { cart, removeFromCart, clearCart } = useCarrito();
+  const usuario = authState.usuario; 
   const navigate = useNavigate();
 
   const handleRealizarPedido = () => {
-    if (logged) {
+    if (authState.isAuthenticated) {
       // Lógica para realizar el pedido (usuario autenticado)
       console.log('Pedido realizado');
-      navigate('/direcciones');
+      navigate(`/direccion/${usuario?.usuario}`);
     } else {
       // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
       navigate('/login');

@@ -1,35 +1,35 @@
 // AuthContext.js
-import { createContext, useContext, useReducer } from 'react';
 
-const AuthContext = createContext();
+import { createContext, useState } from "react";
 
-const initialState = {
-  logged: false,
-  // otros datos relacionados con el usuario
-};
+export const AuthContext = createContext();
 
-const authReducer = (state, action) => {
-  switch (action.type) {
-    case 'LOGIN':
-      return { ...state, logged: true };
-    case 'LOGOUT':
-      return { ...state, logged: false };
-    // manejar otras acciones según sea necesario
-    default:
-      return state;
-  }
-};
+
 
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+
+  const [authState, setAuthState] = useState({
+    isAuthenticated: false,
+    usuario: null
+  });
+
+  const setUserData = (userData) => {
+    setAuthState({  
+       isAuthenticated: true,
+       usuario: userData
+    });
+  }
+
+  const logout = () => {
+    setAuthState({
+       isAuthenticated: false,
+       usuario: null     
+    });
+  }
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ authState, setUserData, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  return useContext(AuthContext);
 };

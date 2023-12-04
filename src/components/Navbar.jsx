@@ -1,16 +1,19 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink} from 'react-router-dom'
 // import { useState } from 'react';
 // import Swal from 'sweetalert2';
 import { useCarrito } from '../context/CarritoContext';
 import { useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 
-const Navbar = ({userData}) => {
+const Navbar = () => {
 
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const  {state} = useLocation();
-    const navigate = useNavigate();
+    //const  {state} = useLocation();
+    //const navigate = useNavigate();
     const { cart } = useCarrito();
-
+    const { authState, logout } = useContext(AuthContext); 
+    const usuario = authState.usuario; 
     // const handleLogin = () => {
     //   // Lógica para iniciar sesión
     //   setIsLoggedIn(true);
@@ -21,13 +24,15 @@ const Navbar = ({userData}) => {
         setShowProfileMenu(!showProfileMenu);
     }
 
+
+
   
 
-    const handleLogout = () => {
-        navigate('/', {
-            replace: true
-        },
-    );
+    // const handleLogout = () => {
+    //     navigate('/', {
+    //         replace: true
+    //     },
+    // );
     //   // Lógica para cerrar sesión
     //   Swal.fire({
     //     title: 'Confirmar Cierre de sesión',
@@ -43,7 +48,7 @@ const Navbar = ({userData}) => {
     //       // Otras acciones después de cerrar sesión, como redirigir a la página de inicio de sesión
     //     }
     //   });
-    };
+    //};
 
     return(
         <>
@@ -94,7 +99,7 @@ const Navbar = ({userData}) => {
                                     </span>
                                 </button>
                             </NavLink>
-                        {state?.logged? (
+                        {authState?.isAuthenticated? (
                         <div className="flex items-center space-x-2">
                             {/* Puedes personalizar la opción de perfil según tus necesidades */}
                             {/* <span className="text-gray-900">Hola, Usuario</span> */}
@@ -175,24 +180,24 @@ const Navbar = ({userData}) => {
                                     <div className="absolute top-16 right-0 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <div className="px-4 py-3">
                                             <span className="block text-sm text-gray-900 dark:text-white">
-                                                Bonnie Green
+                                                {usuario.usuario}
                                             </span>
-                                            <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-                                                name@flowbite.com
-                                            </span>
+                                            {/* <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                                                {usuario.correo}
+                                            </span> */}
                                         </div>
                                         <ul className="py-2" aria-labelledby="user-menu-button">
                                             <li>
-                                                <NavLink
-                                                    to={`/pedidos/${userData?.usuario}`}
+                                                <Link
+                                                    to={`/pedidos/${usuario?.usuario}`}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                     >
                                                     Mis Pedidos
-                                                </NavLink>
+                                                </Link>
                                             </li>
                                             <li>
                                                 <NavLink
-                                                    to="/direcciones"
+                                                    to={`/direcciones/${usuario?.usuario}`}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                     >
                                                     Direcciones
@@ -200,7 +205,7 @@ const Navbar = ({userData}) => {
                                             </li>
                                             <li>
                                                 <NavLink
-                                                    onClick={handleLogout} 
+                                                    onClick={logout} 
                                                     to="/"
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                     >

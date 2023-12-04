@@ -1,86 +1,127 @@
-// AgregarDireccionForm.jsx
-//import { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+//import { useParams } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const DireccionesForm = () => {
-//   const [nuevaDireccion, setNuevaDireccion] = useState({
-//     nombre: '',
-//     direccion: '',
-//     ciudad: '',
-//   });
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setNuevaDireccion((prevDireccion) => ({
-//       ...prevDireccion,
-//       [name]: value,
-//     }));
-//   };
+  const { authState } = useContext(AuthContext);
+  const usuario = authState.usuario; 
+  const { name } = useParams();
+  const [direccion, setDireccion] = useState({
+    nombreCompleto: '',
+    calleNumero: '', 
+    codigoPostal: '',
+    telefono: '',
+    usuario: {
+      id: 0,
+      usuario: usuario?.usuario,
+      correo: '',
+      contrasenia: '',
+      rol: '',
+      estatus: ''
+    }
+  });
 
-//   const agregarDireccion = () => {
-//     // Aquí puedes agregar la lógica para validar y agregar la nueva dirección
-//     onAgregarDireccion({
-//       ...nuevaDireccion,
-//       id: Math.floor(Math.random() * 1000), // Generar un ID único (puedes utilizar una lógica más robusta)
-//     });
+  const handleInputChange = (e) => {
+    setDireccion({
+      ...direccion,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-//     setNuevaDireccion({
-//       nombre: '',
-//       direccion: '',
-//       ciudad: '',
-//     });
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`https://idgs901apibalones20231114015214.azurewebsites.net/api/Direccion/${name}`, {
+        ...direccion,
+      });
+
+      console.log('Dirección agregada con éxito:', response.data);
+
+      // Puedes realizar acciones adicionales después de agregar la dirección
+      setDireccion({
+        nombreCompleto: '',
+        calleNumero: '',
+        codigoPostal: '',
+        telefono: '',
+      });
+    } catch (error) {
+      console.error('Error al agregar la dirección:', error);
+    }
+  };
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-2">Agregar Nueva Dirección</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="mb-4">
-          <label className="block" htmlFor="nombre">
-            Nombre:
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            // value={nuevaDireccion.nombre}
-            // onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block" htmlFor="direccion">
-            Dirección:
-          </label>
-          <input
-            type="text"
-            id="direccion"
-            name="direccion"
-            // value={nuevaDireccion.direccion}
-            // onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block" htmlFor="ciudad">
-            Ciudad:
-          </label>
-          <input
-            type="text"
-            id="ciudad"
-            name="ciudad"
-            // value={nuevaDireccion.ciudad}
-            // onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-          />
-        </div>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h2 className="text-2xl font-semibold mb-4">Agregar Nueva Dirección</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombreCompleto">
+          Nombre Completo:
+        </label>
+        <input
+          type="text"
+          id="nombreCompleto"
+          name="nombreCompleto"
+          value={direccion.nombreCompleto}
+          onChange={handleInputChange}
+          className="border-2 border-gray-300 p-2 w-full rounded-md focus:outline-none focus:border-blue-500"
+        />
       </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="calleNumero">
+            Calle y Número:
+          </label>
+          <input
+            type="text"
+            id="calleNumero"
+            name="calleNumero" 
+            value={direccion.calleNumero}
+            onChange={handleInputChange}
+            className="border-2 border-gray-300 p-2 w-full rounded-md focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="codigoPostal">
+          Código Postal:
+        </label>
+        <input
+          type="text"
+          id="codigoPostal"
+          name="codigoPostal"
+          value={direccion.codigoPostal}
+          onChange={handleInputChange}
+          className="border-2 border-gray-300 p-2 w-full rounded-md focus:outline-none focus:border-blue-500"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="telefono">
+          Teléfono:
+        </label>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          value={direccion.telefono}
+          onChange={handleInputChange}
+          className="border-2 border-gray-300 p-2 w-full rounded-md focus:outline-none focus:border-blue-500"
+        />
+      </div>
+
       <button
-        // onClick={agregarDireccion}
-        className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none"
-      >
-        Agregar Dirección
-      </button>
-    </div>
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Agregar Dirección
+        </button>
+    </form>
+  </div>
   );
 };
 
