@@ -3,7 +3,7 @@ import axios from 'axios';
 import Rating from './Rating';
 import { useCarrito } from '../context/CarritoContext'; // Importa el hook del contexto del carrito
 
-const CatalogoCard = () => {
+const CatalogoHome = () => {
   const { addToCart } = useCarrito();
   const [results, setResults] = useState([]);
 
@@ -20,11 +20,18 @@ const CatalogoCard = () => {
     fetchData();
   }, []);
 
+    // Asegurarse de que haya datos antes de renderizar el componente CatalogoCard
+    if (!results || results.length === 0) {
+        return null;
+    }
+    // Limitar la cantidad de productos a mostrar a un máximo de 10
+    const productosAMostrar = results.slice(0, 10);
+
   return (
     <>
       <div className='flex justify-center'>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-          {results.map(item => (
+          {productosAMostrar.map(item => (
             <div key={item.id} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center justify-center">
                 <a href="#">
@@ -68,4 +75,4 @@ const CatalogoCard = () => {
   );
 }
 
-export default CatalogoCard;
+export default CatalogoHome;

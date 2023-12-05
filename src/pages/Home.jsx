@@ -1,10 +1,9 @@
-import CatalogoCard from '../components/CatalogoCard';
 
+import CatalogoHome from '../components/CatalogoHome';
 
 export default function Home() {
 
     
-
     return (
         <>
             <div id="default-carousel" className="relative w-full" data-carousel="slide">
@@ -58,7 +57,7 @@ export default function Home() {
                 </button>
             </div>
 
-            <CatalogoCard />
+            <CatalogoHome />
         </>
     )
 }

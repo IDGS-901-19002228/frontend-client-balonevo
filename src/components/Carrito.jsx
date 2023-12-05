@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
 import { AuthContext } from '../context/AuthContext';

@@ -12,7 +12,13 @@ import Carrito from './components/Carrito';
 import DetallePedido from './components/DetallePedido';
 import { AuthProvider } from './context/AuthContext';
 import DireccionesForm from './components/DireccionesForm';
-import DireccionesPage from './pages/DireccionesPage';
+// import DireccionesPage from './pages/DireccionesPage';
+import Resultados from './pages/Resultados';
+import TarjetasList from './components/TarjetasList';
+import TarjetasForm from './components/TarjetasForm';
+import TiendaPage from './pages/TiendaPage';
+import Ticket from './components/Ticket';
+import DireccionesList from './components/DireccionesList';
 
 
 const App = () => {
@@ -25,16 +31,21 @@ const App = () => {
           <Navbar />
           <div className="pt-20">
             <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/tienda" element={<TiendaPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Registro />} />
               <Route path="/pedidos/:name" element={<PedidosCliente />} />
               <Route path="/detallePedido/:id" element={<DetallePedido/>} />
               <Route path="/direcciones/:name" element={<DireccionesForm/>} />
-              <Route path="/direccion/:name" element={<DireccionesPage/>} />
-              <Route path="/carrito" element={<Carrito />} /> {/* Ruta para el carrito */}
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/registro" element={<Registro />} />
-
+              <Route path="/direccion/:name" element={<DireccionesList/>} />
+              <Route path="/tarjetas/:name" element={<TarjetasList/>} />
+              <Route path="/tarjetasform/:name" element={<TarjetasForm/>} />
+              <Route path="/carrito" element={<Carrito />} />
+              <Route path="/resultados" element={<Resultados />} /> 
+              <Route path="/ticket" element={<Ticket/>}/>
+              {/* <Route pages="/preticket" element{<PreTicket/>} /> */}
             </Routes>
           </div>
         </BrowserRouter>
