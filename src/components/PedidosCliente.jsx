@@ -23,7 +23,7 @@ const PedidosCliente = () => {
   }, [name]);
 
   return (
-    <div className='container mx-auto px-8 bg-white border border-gray-200 rounded-lg'>
+    <div className='m-4 container mx-auto px-8 bg-white border border-gray-200 rounded-lg'>
    <h1 className='text-2xl font-bold mb-4 text-center'>Mis Pedidos</h1>
    <table className='min-w-full divide-y divide-gray-400 px-9 bg-white border border-gray-300 rounded-lg'>
     <thead className='bg-gray-50'>
@@ -44,7 +44,10 @@ const PedidosCliente = () => {
             Estatus
           </th>
           <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-            Tarjeta
+            Numero Tarjeta
+          </th>
+          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+            Fecha Vencimiento
           </th>
           <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
             

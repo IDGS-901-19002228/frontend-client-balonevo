@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 
 const TarjetasForm = () => {
@@ -49,7 +50,13 @@ const TarjetasForm = () => {
         });
   
         console.log('Dirección agregada con éxito:', response.data);
-  
+        Swal.fire({
+            icon: 'success',
+            title: 'Tarjeta registrada con exito',
+            text: 'Tu tarjeta ha sido registrada correctamente',
+          }).then(() => {
+            navigate(`/tarjetas/${usuario?.usuario}`);
+          })
         // Puedes realizar acciones adicionales después de agregar la dirección
         setTarjetas({
             nombreTarjeta: '',

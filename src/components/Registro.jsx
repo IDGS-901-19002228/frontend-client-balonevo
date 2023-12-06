@@ -32,43 +32,49 @@ const Registro = () => {
           text: 'El nombre de usuario ya está ocupado, intenta con otro'
         });
       } else {
-        const result = await Swal.fire({
-          title: 'Confirmar Datos',
-          text: '¿Estás seguro de que los datos ingresados son correctos?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, estoy seguro',
-          cancelButtonText: 'Cancelar'
-        });
-
-        if (result.isConfirmed) {
-          const postResponse = await fetch('https://idgs901apibalones20231114015214.azurewebsites.net/api/Cliente', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cliente)
+          const result = await Swal.fire({
+            title: 'Confirmar Datos',
+            text: '¿Estás seguro de que los datos ingresados son correctos?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, estoy seguro',
+            cancelButtonText: 'Cancelar'
           });
-
-          const data = await postResponse.json();
-          console.log('Usuario agregado:', data);
-
           Swal.fire({
             icon: 'success',
             title: 'Éxito',
             text: 'Registro exitoso'
+          }).then(() => {
+            navigate('/login');
           });
-
-          navigate('/login');
+          if (result.isConfirmed) {
+            const postResponse = await fetch('https://idgs901apibalones20231114015214.azurewebsites.net/api/Cliente', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(cliente)
+            });
+  
+            const data = await postResponse.json();
+            console.log('Usuario agregado:', data);
+            
+            // Swal.fire({
+            //   icon: 'success',
+            //   title: 'Éxito',
+            //   text: 'Registro exitoso'
+            // }).then(() => {
+            //   navigate('/login');
+            // });
         }
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Hubo un problema al verificar el usuario'
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error',
+      //   text: 'Hubo un problema al verificar el usuario'
+      // });
     }
   };
 

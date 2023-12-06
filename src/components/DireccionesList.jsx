@@ -24,6 +24,13 @@ const DireccionesList = () => {
   //   }
   // };
 
+  const handleRegistrarTarjeta = () => {
+    if (authState.isAuthenticated) {
+      // Lógica para realizar el pedido (usuario autenticado)
+      navigate(`/direcciones/${usuario?.usuario}`);
+  }
+};
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -116,9 +123,9 @@ const DireccionesList = () => {
          )}
        </tbody>
      </table>
-     {/* <button onClick={handleSeleccionarTarjeta} className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
-        Proceder al pago
-      </button> */}
+     <button onClick={handleRegistrarTarjeta} className="mt-4 bg-green-500 text-white p-2 rounded-md hover:bg-green-600">
+        Agregar Nueva Direccion
+      </button>
    </div>
    
    

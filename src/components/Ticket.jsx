@@ -1,18 +1,20 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
 import axios from 'axios';
 import { v4 as uuidv4 } from "uuid";
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Ticket = () => {
 
-    const { cart } = useCarrito();
+    const { cart, clearCart } = useCarrito();
     const { authState } = useContext(AuthContext);
     const usuario = authState.usuario;
     const location = useLocation();
     const direccionData = location.state?.direccionData;
     const tarjetaData = location.state?.tarjetaData;
+    const navigate = useNavigate();
     
     const calcularTotal = () => {
         return cart.reduce((total, item) => total + item.precio * item.cantidad, 0).toFixed(2);
@@ -79,29 +81,42 @@ const Ticket = () => {
                       
                 }
             );
-
-            if (response.data && response.data.idPedido) {
+                
+            console.log(response.data);
+           
               cart.forEach((producto) => {
-                agregarDetallePedido(response.data.idPedido, producto);
-              });  
-            }
-         
-            //console.log(response.data);
+                agregarDetallePedido(producto);
+            }); 
+            
+            clearCart();
+            Swal.fire({
+                icon: 'success',
+                title: 'Pedido Realizado con exito',
+                text: 'Tu pedido ha sido realizado correctamente',
+            }).then(() => {
+                navigate(`/pedidos/${usuario?.usuario}`);
+            })
+            
         } catch (error) {
             console.error('Error al realizar el pedido:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al realizar el pedido',
+                text: 'Ocurrio un error al momento de realizar tu pedido',
+            });
         }
 
     };
 
-    const agregarDetallePedido =  async (idPedido, producto)  => {
+    const agregarDetallePedido =  async ( producto)  => {
         try {
             const response = await axios.post(
                 'https://idgs901apibalones20231114015214.azurewebsites.net/api/Pedidos/insertar_detalle',
                 {
                     id: 0,
-                    cantidad: cart.cantidad,
+                    cantidad: producto.cantidad,
                     pedidos:{ 
-                        idPedido: idPedido,
+                        idPedido: 0,
                         cliente: {
                             id: 0,
                             nombre: "string",
@@ -127,6 +142,22 @@ const Ticket = () => {
                                 estatus: "string"
                             }
                         },
+                        tarjeta: {
+                          id: tarjetaData.id,
+                          nombreTarjeta: tarjetaData.nombreTarjeta,
+                          numTarjeta:tarjetaData.numTarjeta,
+                          fechaVencimiento: tarjetaData.fechaVencimiento,
+                          ccv:tarjetaData.ccv ,
+                            usuario: {
+                              id: 0,
+                              nombre: "string",
+                              usuario: "string",
+                              correo: "string",
+                              contrasenia: "string",
+                              rol: "string",
+                              estatus: "string"
+                            }
+                          },
                         folio: "string",
                         fecha: "2023-12-05T14:31:16.078Z",
                         estatus: "string"
@@ -179,7 +210,7 @@ const Ticket = () => {
                             <h3>Tarjeta Seleccionada</h3>
                             <li  className="p-4 border rounded-md">
                                 <p className="text-gray-600">Número de Tarjeta: {tarjetaData.nombreTarjeta}</p>
-                                <p className="text-gray-600">Número de Tarjeta: **** **** ****  {tarjetaData.numTarjeta.slice(-4)}</p>
+                                <p className="text-gray-600">Número de Tarjeta: ** ** **  {tarjetaData.numTarjeta.slice(-4)}</p>
                                 <p className="text-gray-600">Fecha de Vencimiento: {tarjetaData.fechaVencimiento}</p>
                                 <p className="text-gray-600">CVV: {tarjetaData.ccv.replace(/./g, '*')}</p>
                             </li>
@@ -210,7 +241,7 @@ const Ticket = () => {
                                 <div className="text-xl font-semibold mt-auto">
                                     Total: ${calcularTotal()}
                                 </div>
-                                <button onClick={agregarPedido()} className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
+                                <button onClick={()=>agregarPedido()} className="bg-blue-700 text-white px-4 py-2 mt-2 hover:bg-blue-800 focus:outline-none">
                                     Realizar pedido
                                 </button>
                         </div>

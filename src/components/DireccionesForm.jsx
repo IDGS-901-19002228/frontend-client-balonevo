@@ -2,14 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 //import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 const DireccionesForm = () => {
 
   const { authState } = useContext(AuthContext);
   const usuario = authState.usuario; 
   const { name } = useParams();
+  const navigate = useNavigate();
   const [direccion, setDireccion] = useState({
     nombreCompleto: '',
     calleNumero: '', 
@@ -32,6 +34,13 @@ const DireccionesForm = () => {
     });
   };
 
+  const handleRegresarDireccionesList = () => {
+    if (authState.isAuthenticated) {
+      // Lógica para realizar el pedido (usuario autenticado)
+      navigate(`/direccion/${usuario?.usuario}`);
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,7 +49,13 @@ const DireccionesForm = () => {
         ...direccion,
       });
 
-      console.log('Dirección agregada con éxito:', response.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Direccion registrada con exito',
+        text: 'Tu direccion ha sido registrada correctamente',
+      }).then(() => {
+        navigate(`/direccion/${usuario?.usuario}`);
+      })
 
       // Puedes realizar acciones adicionales después de agregar la dirección
       setDireccion({
@@ -120,7 +135,11 @@ const DireccionesForm = () => {
         >
           Agregar Dirección
         </button>
+        <button onClick={handleRegresarDireccionesList} className="mt-4 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">
+            Regresar
+    </button>
     </form>
+
   </div>
   );
 };
