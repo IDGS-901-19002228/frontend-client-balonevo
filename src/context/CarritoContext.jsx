@@ -7,13 +7,25 @@ export const CarritoProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (item) => {
-    setCart(prevCart => [...prevCart, item]);
+    const existingItemIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
+    if(existingItemIndex !==-1){
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].cantidad +=1;
+      setCart(updatedCart);
+    } else {
+      setCart((prevCart) => [...prevCart, { ...item, cantidad: 1 }]);
+    }
   };
 
   const removeFromCart = (itemId) => {
-    // Puedes utilizar filter para eliminar el item del carrito
-    setCart(prevCart => prevCart.filter(item => item.id !== itemId));
+    // Puedes utilizar filter para eliminar el item del carrito o decrementar la cantidad
+    const updatedCart = cart.map((item) =>
+      item.id === itemId ? { ...item, cantidad: item.cantidad - 1 } : item
+    );
+
+    setCart(updatedCart.filter((item) => item.cantidad > 0));
   };
+
 
   const clearCart = () => {
     // Puedes utilizar setCart para reiniciar el carrito a un array vacío

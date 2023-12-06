@@ -5,14 +5,13 @@ import { useContext } from 'react';
 
 const Carrito = () => {
   const { authState } = useContext(AuthContext); 
-  const { cart, removeFromCart, clearCart } = useCarrito();
+  const {addToCart, cart, removeFromCart, clearCart } = useCarrito();
   const usuario = authState.usuario; 
   const navigate = useNavigate();
 
   const handleRealizarPedido = () => {
     if (authState.isAuthenticated) {
       // Lógica para realizar el pedido (usuario autenticado)
-      console.log('Pedido realizado');
       navigate(`/direccion/${usuario?.usuario}`);
     } else {
       // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
@@ -22,7 +21,7 @@ const Carrito = () => {
   };
 
   const calcularTotal = () => {
-    return cart.reduce((total, item) => total + item.precio, 0).toFixed(2);
+    return cart.reduce((total, item) => total + item.precio * item.cantidad, 0).toFixed(2);
   };
 
   return (
@@ -39,11 +38,21 @@ const Carrito = () => {
                 <img src={item.imagen} alt={item.nombre} className="w-16 h-16 object-cover rounded" />
                 <div className="ml-4">
                   <p className="text-lg font-semibold">{item.nombre}</p>
-                  <p className="text-gray-500">${item.precio}</p>
+                  <p className="text-gray-500">${item.precio} x {item.cantidad}</p>
                 </div>
               </div>
-              <div>
-                <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-600 focus:outline-none">
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  min="1"
+                  value={item.cantidad}
+                  onChange={(e) => {
+                    const newQuantity = parseInt(e.target.value, 10);
+                    addToCart({ ...item, cantidad: newQuantity });
+                  }}
+                  className="w-12 text-center border border-gray-300 rounded"
+                />
+                <button onClick={() => removeFromCart(item.id)} className="ml-2 text-red-500 hover:text-red-600 focus:outline-none">
                   Eliminar
                 </button>
               </div>

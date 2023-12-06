@@ -55,3 +55,45 @@
 1/12/2023, 17:19:30: Se ha iniciado la sesión para el usuario1
 1/12/2023, 17:23:30: Error en la prueba: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="login"]"}
   (Session info: chrome=119.0.6045.200)
+5/12/2023, 16:47:39: Tiempo de respuesta al iniciar sesion: 640.7245999872684 ms
+5/12/2023, 16:47:39: Se ha iniciado la sesión para el usuario1
+5/12/2023, 16:47:41: Tiempo de respuesta al agregar al carrito: 2039.1666000187397 ms
+5/12/2023, 16:47:41: agrego un producto al carrito 
+5/12/2023, 16:47:41: ingreso a mis pedidos
+5/12/2023, 16:47:41: cierre de sesion
+5/12/2023, 18:02:14: Tiempo de respuesta al iniciar sesion: 648.9086999893188 ms
+5/12/2023, 18:02:14: Se ha iniciado la sesión para el usuario1
+5/12/2023, 18:02:19: Error en la prueba: Waiting for element to be located By(css selector, .agregarProducto)
+Wait timed out after 5135ms
+5/12/2023, 18:03:01: Tiempo de respuesta al iniciar sesion: 742.8075000047684 ms
+5/12/2023, 18:03:01: Se ha iniciado la sesión para el usuario1
+5/12/2023, 18:03:03: Tiempo de respuesta al agregar al carrito: 2279.7090000212193 ms
+5/12/2023, 18:03:03: agrego un producto al carrito 
+5/12/2023, 18:03:03: ingreso a mis pedidos
+5/12/2023, 18:03:03: cierre de sesion
+5/12/2023, 18:07:04: Tiempo de respuesta al iniciar sesion: 485.2583000063896 ms
+5/12/2023, 18:07:04: Se ha iniciado la sesión para el usuario2
+5/12/2023, 18:07:06: Tiempo de respuesta al agregar al carrito: 2007.3862000107765 ms
+5/12/2023, 18:07:06: agrego un producto al carrito 
+5/12/2023, 18:07:06: ingreso a mis pedidos
+5/12/2023, 18:07:06: cierre de sesion
+5/12/2023, 18:07:06: Prueba de funcionalidad y disponibilidad realizada con éxito
+5/12/2023, 18:07:06: Tiempo total de ejecución: 246358 ms
+5/12/2023, 18:28:33: Tiempo de respuesta al iniciar sesion: 591.2680000066757 ms
+5/12/2023, 18:28:33: Se ha iniciado la sesión para el usuario1
+5/12/2023, 18:28:35: Tiempo de respuesta al agregar al carrito: 1850.0027000010014 ms
+5/12/2023, 18:28:35: agrego un producto al carrito 
+5/12/2023, 18:28:35: ingreso a mis pedidos
+5/12/2023, 18:28:35: cierre de sesion
+5/12/2023, 18:32:36: Tiempo de respuesta al iniciar sesion: 708.1877999901772 ms
+5/12/2023, 18:32:36: Se ha iniciado la sesión para el usuario2
+5/12/2023, 18:32:38: Tiempo de respuesta al agregar al carrito: 2308.3772999942303 ms
+5/12/2023, 18:32:38: agrego un producto al carrito 
+5/12/2023, 18:32:39: ingreso a mis pedidos
+5/12/2023, 18:32:39: cierre de sesion
+5/12/2023, 18:32:39: Tiempo total de ejecución: 246565 ms
+5/12/2023, 18:32:39: Prueba de funcionalidad y disponibilidad realizada con éxito
+5/12/2023, 18:33:21: Tiempo de respuesta al iniciar sesion: 531.3759000003338 ms
+5/12/2023, 18:33:21: Se ha iniciado la sesión para el usuario1
+5/12/2023, 18:33:26: Error en la prueba: Waiting for element to be located By(css selector, .agregarProducto)
+Wait timed out after 5021ms

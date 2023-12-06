@@ -44,6 +44,9 @@ const PedidosCliente = () => {
             Estatus
           </th>
           <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+            Tarjeta
+          </th>
+          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
             
           </th>
         </tr>
@@ -57,6 +60,8 @@ const PedidosCliente = () => {
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.direccion.calleNumero}</td>
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.fecha}</td>
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.estatus}</td>
+              <td className='px-6 py-4 whitespace-nowrap'>** ** **  {pedido.tarjeta.numTarjeta.slice(-4)}</td>
+              <td className='px-6 py-4 whitespace-nowrap'>{pedido.tarjeta.fechaVencimiento}</td>
               <td className='px-6 py-4 whitespace-nowrap'>
                 <Link to={`/detallePedido/${pedido.idPedido}`} className='text-indigo-600 hover:text-indigo-900'>
                   Detalles
