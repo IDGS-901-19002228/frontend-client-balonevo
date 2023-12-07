@@ -27,29 +27,29 @@ const PedidosCliente = () => {
    <h1 className='text-2xl font-bold mb-4 text-center'>Mis Pedidos</h1>
    <table className='min-w-full divide-y divide-gray-400 px-9 bg-white border border-gray-300 rounded-lg'>
     <thead className='bg-gray-50'>
-        <tr>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+        <tr className='text-center'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Folio
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Propietario
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Dirección de entrega
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Fecha
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Estatus
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Numero Tarjeta
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             Fecha Vencimiento
           </th>
-          <th scope='col' className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+          <th scope='col' className='px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider'>
             
           </th>
         </tr>
@@ -57,7 +57,7 @@ const PedidosCliente = () => {
       <tbody className='bg-white divide-y divide-gray-200'>
         {pedidos !== null ? (
           pedidos.map((pedido) => (
-            <tr key={pedido.id} className='hover:bg-gray-100'>
+            <tr key={pedido.id} className='hover:bg-gray-100 text-center'>
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.folio}</td>
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.direccion.nombreCompleto} </td>
               <td className='px-6 py-4 whitespace-nowrap'>{pedido.direccion.calleNumero}</td>

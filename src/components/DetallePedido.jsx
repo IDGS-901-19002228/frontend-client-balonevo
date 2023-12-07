@@ -29,7 +29,7 @@ const DetallePedido = () => {
   }, 0);
   
   return (
-   <div className='container mx-auto px-8 bg-white border border-gray-200 rounded-lg'>
+   <div className='m-4 container mx-auto px-8 bg-white border border-gray-200 rounded-lg'>
     <h1 className='text-2xl font-bold mb-4 text-center'>Detalle del pedido</h1>
     
      <table className='min-w-full divide-y divide-gray-400 px-9 bg-white border border-gray-300 rounded-lg'>

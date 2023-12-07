@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 const Carrito = () => {
   const { authState } = useContext(AuthContext); 
@@ -12,9 +13,14 @@ const Carrito = () => {
   const handleRealizarPedido = () => {
     if (authState.isAuthenticated) {
       // Lógica para realizar el pedido (usuario autenticado)
-      navigate(`/direccion/${usuario?.usuario}`);
+      navigate(`/direccion-ticket/${usuario?.usuario}`);
     } else {
       // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
+      Swal.fire({
+        icon: 'error',
+        title: 'No iniciaste sesion',
+        text: 'Inicia sesion para continuar',
+      });
       navigate('/login');
       console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
     }

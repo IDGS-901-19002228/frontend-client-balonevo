@@ -49,6 +49,8 @@ const DireccionesForm = () => {
         ...direccion,
       });
 
+      console.log(response.data);
+
       Swal.fire({
         icon: 'success',
         title: 'Direccion registrada con exito',

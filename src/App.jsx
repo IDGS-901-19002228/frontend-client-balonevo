@@ -19,10 +19,15 @@ import TarjetasForm from './components/TarjetasForm';
 import TiendaPage from './pages/TiendaPage';
 import Ticket from './components/Ticket';
 import DireccionesList from './components/DireccionesList';
+import DireccionesTicket from './components/DireccionesTicket';
+import TarjetasTicket from './components/TarjetasTicket';
+import Footer from './components/Footer';
+import DetalleProducto from './components/DetalleProducto';
 
 
 const App = () => {
  
+  
 
   return (
     <AuthProvider>
@@ -34,13 +39,16 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/tienda" element={<TiendaPage />} />
+              <Route path="/producto/:id" element={<DetalleProducto/>} />
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/pedidos/:name" element={<PedidosCliente />} />
               <Route path="/detallePedido/:id" element={<DetallePedido/>} />
               <Route path="/direcciones/:name" element={<DireccionesForm/>} />
               <Route path="/direccion/:name" element={<DireccionesList/>} />
+              <Route path="/direccion-ticket/:name" element={<DireccionesTicket/>} />
               <Route path="/tarjetas/:name" element={<TarjetasList/>} />
+              <Route path="/tarjetas-ticket/:name" element={<TarjetasTicket/>} />
               <Route path="/tarjetasform/:name" element={<TarjetasForm/>} />
               <Route path="/carrito" element={<Carrito />} />
               <Route path="/resultados" element={<Resultados />} /> 
@@ -48,6 +56,7 @@ const App = () => {
               {/* <Route pages="/preticket" element{<PreTicket/>} /> */}
             </Routes>
           </div>
+          <Footer/>
         </BrowserRouter>
       </CarritoProvider>
     </AuthProvider>

@@ -17,6 +17,7 @@ const TarjetasForm = () => {
       numTarjeta: '', 
       fechaVencimiento: '',
       ccv: '',
+      //estatus: '',
       usuario: {
         id: 0,
         usuario: usuario?.usuario,
@@ -49,7 +50,7 @@ const TarjetasForm = () => {
           ...tarjetas,
         });
   
-        console.log('Dirección agregada con éxito:', response.data);
+        console.log(response.data);
         Swal.fire({
             icon: 'success',
             title: 'Tarjeta registrada con exito',
@@ -65,7 +66,12 @@ const TarjetasForm = () => {
             ccv: '',
         });
       } catch (error) {
-        console.error('Error al agregar la dirección:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar la tarjeta',
+          text: 'Ocurrio un error al momento de agregar tu tarjeta',
+      });
+        //console.error('Error al agregar la dirección:', error);
       }
     };
 
@@ -85,7 +91,7 @@ const TarjetasForm = () => {
                     value={tarjetas.nombreTarjeta}
                     onChange={handleInputChange}
                     className="mt-1 p-2 w-full border rounded-md"
-                    placeholder="1234 5678 9012 3456"
+                    placeholder="Nombre en Tarjeta"
                     />
                 </div>
                 <div className="mb-4">
@@ -115,7 +121,7 @@ const TarjetasForm = () => {
                             onChange={handleInputChange}
                             className="mt-1 p-2 w-full border rounded-md"
                             placeholder="MM/YY"
-                            maxLength="4"
+                            maxLength="6"
                         />
                     </div>
                     <div className="mb-4">

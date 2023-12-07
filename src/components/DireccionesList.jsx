@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 
 
 const DireccionesList = () => {
@@ -13,23 +14,19 @@ const DireccionesList = () => {
   const { name } = useParams();
   const usuario = authState.usuario; 
 
-  // const handleSeleccionarTarjeta = () => {
-  //   if (authState.isAuthenticated) {
-  //     // Lógica para realizar el pedido (usuario autenticado)
-  //     navigate(`/tarjetas/${usuario?.usuario}`);
-  //   } else {
-  //     // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
-  //     navigate('/login');
-  //     console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
-  //   }
-  // };
-
   const handleRegistrarTarjeta = () => {
     if (authState.isAuthenticated) {
       // Lógica para realizar el pedido (usuario autenticado)
       navigate(`/direcciones/${usuario?.usuario}`);
-  }
-};
+    }else {
+      Swal.fire({
+        icon: 'error',
+        title: 'No iniciaste sesion',
+        text: 'Inicia sesion para continuar',
+    });
+    navigate(`/login`);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,29 +41,29 @@ const DireccionesList = () => {
     fetchData();
   }, [name]);
 
-  const eliminarDireccion = async (id) => {
-    try {
-      await axios.delete(`https://idgs901apibalones20231114015214.azurewebsites.net/api/Direccion/${id}`);
-      // Refresh the list after deleting
-      const res = await axios.get(`https://idgs901apibalones20231114015214.azurewebsites.net/api/Direccion/${name}`);
-      setDirecciones(res.data);
-    } catch (error) {
-      console.error('Error deleting data:', error);
-    }
-  };
+  // const eliminarDireccion = async (id) => {
+  //   try {
+  //     await axios.delete(`https://idgs901apibalones20231114015214.azurewebsites.net/api/Direccion/${id}`);
+  //     // Refresh the list after deleting
+  //     const res = await axios.get(`https://idgs901apibalones20231114015214.azurewebsites.net/api/Direccion/${name}`);
+  //     setDirecciones(res.data);
+  //   } catch (error) {
+  //     console.error('Error deleting data:', error);
+  //   }
+  // };
 
-  const seleccionarDireccion = (direccion) => { 
+  // const seleccionarDireccion = (direccion) => { 
 
-    if (authState.isAuthenticated) {
-      // Lógica para realizar el pedido (usuario autenticado)
-      navigate(`/tarjetas/${usuario?.usuario}`, {state: {direccionData: direccion}});
-      // navigate('/ticket', { state: { direccionData: direccion } });
-    } else {
-      // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
-      navigate('/login');
-      console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
-    }
-  };
+  //   if (authState.isAuthenticated) {
+      
+  //     navigate(`/tarjetas/${usuario?.usuario}`, {state: {direccionData: direccion}});
+      
+  //   } else {
+     
+  //     navigate('/login');
+  //     console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
+  //   }
+  // };
   
 
   return (
@@ -102,15 +99,15 @@ const DireccionesList = () => {
                <td className='px-6 py-4 whitespace-nowrap'>{direccion.codigoPostal}</td>
                <td className='px-6 py-4 whitespace-nowrap'>{direccion.telefono}</td>
                <td className='px-6 py-4 whitespace-nowrap'>
-                  <button  onClick={() => seleccionarDireccion(direccion)}
+                  {/* <button  onClick={() => seleccionarDireccion(direccion)}
                     className="agregarProducto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Seleccionar
-                  </button>
-                 <button onClick={() => eliminarDireccion(direccion.id)} className="eliminarDireccion text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                  </button> */}
+                 {/* <button onClick={() => eliminarDireccion(direccion.id)} className="eliminarDireccion text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                   >
                     Eliminar
-                  </button>
+                  </button> */}
                </td>
              </tr>
            ))
