@@ -29,6 +29,5 @@ export default function SearchBox({onSearch}){
     )
 }
 
-//const url = 'https://idgs901apibalones20231114015214.azurewebsites.net/api/Productos';
 
 

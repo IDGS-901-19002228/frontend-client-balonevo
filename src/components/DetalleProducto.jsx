@@ -43,6 +43,7 @@ const DetalleProducto = () => {
                 src={product[0].imagen} 
                 alt={product[0].nombre}
                 className="object-cover w-full h-96 rounded"
+                style={{ maxWidth: '400px', width: '100%', height: '350px' }}  
               />
             </div>
           </div>
@@ -53,10 +54,14 @@ const DetalleProducto = () => {
                 {product[0].nombre}
               </h5>  
             </div>
-            <p className="mb-5 text-gray-800">
-              {product[0].descripcion}
-            </p>
-  
+            
+              <span>Descripcion: </span>
+              <p className="mb-5 text-gray-800">
+                {product[0].descripcion}
+              </p>
+            <div className="flex items-center mt-3">
+              <h5 className="mr-2 text-xl">Cantidad Disponible: {product[0].stock}</h5>
+            </div> 
             <div className="flex items-center">
               <div className="flex gap-1 text-sm text-yellow-400">
                 <Rating rating={product[0].rating} />
@@ -64,11 +69,7 @@ const DetalleProducto = () => {
             </div>
             
             <div className="flex items-center mt-3">
-              <h5 className="mr-2 text-2xl font-bold">${product[0].precio}</h5>
-            </div>
-
-            <div className="flex items-center mt-3">
-              <h5 className="mr-2 text-2xl font-bold">Cantidad Disponible: {product[0].stock}</h5>
+              <h5 className="mr-2 text-xl font-bold">Precio ${product[0].precio}</h5>
             </div>
   
             {/* <div className="mt-3 space-y-2">
