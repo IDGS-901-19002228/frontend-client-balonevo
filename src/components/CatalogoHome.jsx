@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from './Rating';
 import { useCarrito } from '../context/CarritoContext'; // Importa el hook del contexto del carrito
+import { Link } from 'react-router-dom';
 
 const CatalogoHome = () => {
   const { addToCart } = useCarrito();
@@ -45,11 +46,13 @@ const CatalogoHome = () => {
               </div>
 
               <div className="px-5 pb-5">
-                <a href="#">
-                  <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {item.nombre}
-                  </h5> 
-                </a>
+                <Link to={`/producto/${item.id}`}>
+                  <a href="#">
+                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      {item.nombre}
+                    </h5> 
+                  </a>
+                </Link>
 
                 <Rating rating={item.rating} />
 

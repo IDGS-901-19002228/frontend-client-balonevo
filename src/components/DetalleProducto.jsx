@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Rating from './Rating';
 import axios from 'axios';
+import { useCarrito } from '../context/CarritoContext';
 
 const DetalleProducto = () => {
-    const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useCarrito();
+    // const [quantity, setQuantity] = useState(1);
 
     const [product, setProduct] = useState(null);
     const { id } = useParams();
@@ -14,7 +16,7 @@ const DetalleProducto = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`https://idgs901apibalones20231114015214.azurewebsites.net/api/productos/buscarbyid${id}`);
+            const response = await axios.get(`https://idgs901apibalones20231114015214.azurewebsites.net/api/productos/buscarbyid/${id}`);
             setProduct(response.data);
             console.log(response.data);
           } catch (error) {
@@ -36,10 +38,10 @@ const DetalleProducto = () => {
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="lg:pr-10">
-            <div key={product.id} className="flex items-center justify-center w-full mb-10">
+            <div key={product[0].id} className="flex items-center justify-center w-full mb-10">
               <img 
-                src={product.imagen} 
-                alt={product.nombre}
+                src={product[0].imagen} 
+                alt={product[0].nombre}
                 className="object-cover w-full h-96 rounded"
               />
             </div>
@@ -48,24 +50,28 @@ const DetalleProducto = () => {
           <div>
             <div>
               <h5 className="mb-2 text-2xl font-bold leading-none sm:text-3xl">
-                {product.nombre}
+                {product[0].nombre}
               </h5>  
             </div>
             <p className="mb-5 text-gray-800">
-              {product.descripcion}
+              {product[0].descripcion}
             </p>
   
             <div className="flex items-center">
               <div className="flex gap-1 text-sm text-yellow-400">
-                <Rating rating={product.rating} />
+                <Rating rating={product[0].rating} />
               </div>
             </div>
             
             <div className="flex items-center mt-3">
-              <h5 className="mr-2 text-2xl font-bold">${product.precio}</h5>
+              <h5 className="mr-2 text-2xl font-bold">${product[0].precio}</h5>
+            </div>
+
+            <div className="flex items-center mt-3">
+              <h5 className="mr-2 text-2xl font-bold">Cantidad Disponible: {product[0].stock}</h5>
             </div>
   
-            <div className="mt-3 space-y-2">
+            {/* <div className="mt-3 space-y-2">
               <label className="text-gray-700" htmlFor="count">
                 Cantidad
               </label>
@@ -118,21 +124,19 @@ const DetalleProducto = () => {
                   </svg>
                 </button>
               </div>
-            </div>
+            </div> */}
   
             <div className="flex gap-2 mt-5">
-              <button 
-                className="flex items-center justify-center w-full px-8 py-2 text-base font-bold text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Agregar al carrito
-              </button>
-  
-              <Link
-                to="/"
-                className="px-6 py-2 text-sm text-gray-100 bg-gray-400 rounded-lg focus:outline-none hover:bg-gray-500"  
-              >
-                Ver carrito
-              </Link>
+                {product[0].stock <= 0 ? (
+                    <p className="text-red-500 font-semibold">Producto no disponible</p>
+                  ) : (
+                    <button 
+                      onClick={() => addToCart(product[0])}
+                      className="agregarProducto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Add to cart
+                    </button>
+                  )}
             </div>
          </div>
        </div>

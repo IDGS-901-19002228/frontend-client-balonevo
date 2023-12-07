@@ -28,6 +28,18 @@ const DireccionesList = () => {
     }
   };
 
+  const modificarDireccion = (direccion) => { 
+    if (authState.isAuthenticated) {
+      // Lógica para realizar el pedido (usuario autenticado)
+      navigate(`/direccionEdit/${direccion.id}`, {state: {direccionData: direccion}});
+    }
+    else {
+      // Lógica para mostrar un mensaje o redirigir al usuario para iniciar sesión
+      navigate('/login');
+      console.log('Usuario no autenticado. Redirigir a iniciar sesión.');
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,6 +111,11 @@ const DireccionesList = () => {
                <td className='px-6 py-4 whitespace-nowrap'>{direccion.codigoPostal}</td>
                <td className='px-6 py-4 whitespace-nowrap'>{direccion.telefono}</td>
                <td className='px-6 py-4 whitespace-nowrap'>
+               <button onClick={() => modificarDireccion(direccion)} 
+                  className="modificarDireccion text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Modificar datos
+                  </button>
                   {/* <button  onClick={() => seleccionarDireccion(direccion)}
                     className="agregarProducto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >

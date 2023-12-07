@@ -23,6 +23,7 @@ import DireccionesTicket from './components/DireccionesTicket';
 import TarjetasTicket from './components/TarjetasTicket';
 import Footer from './components/Footer';
 import DetalleProducto from './components/DetalleProducto';
+import DireccionesEditForm from './components/DireccionesEditForm';
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
               <Route path="/detallePedido/:id" element={<DetallePedido/>} />
               <Route path="/direcciones/:name" element={<DireccionesForm/>} />
               <Route path="/direccion/:name" element={<DireccionesList/>} />
+              <Route path="/direccionEdit/:id" element={<DireccionesEditForm/>} />
               <Route path="/direccion-ticket/:name" element={<DireccionesTicket/>} />
               <Route path="/tarjetas/:name" element={<TarjetasList/>} />
               <Route path="/tarjetas-ticket/:name" element={<TarjetasTicket/>} />
